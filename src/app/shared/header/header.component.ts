@@ -1,6 +1,7 @@
 import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,15 @@ import { UserService } from '../../services/user.service';
 })
 export class HeaderComponent {
 
+  public user: User;
+
   constructor(
     private ngZone: NgZone,
     private router: Router,
     private userService: UserService
-  ) { }
+  ) {
+    this.user = userService.user;
+  }
 
   signOut() {
     this.userService.signOut();

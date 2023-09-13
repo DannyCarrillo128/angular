@@ -7,9 +7,11 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { Charts1Component } from "./charts1/charts1.component";
 import { MainComponent } from "./main/main.component";
+import { ProfileComponent } from "./profile/profile.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { PromisesComponent } from "./promises/promises.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
+import { UsersComponent } from "./users/users.component";
 
 const routes: Routes = [
   {
@@ -20,9 +22,11 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, data: { title: 'Dashboard' } },
       { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Account settings' } },
       { path: 'charts1', component: Charts1Component, data: { title: 'Dounut Charts' } },
+      { path: 'profile', component: ProfileComponent, data: { title: 'Profile' } },
       { path: 'progress', component: ProgressComponent, data: { title: 'Progress bar' } },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' } },
-      { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' } }
+      { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' } },
+      { path: 'users', component: UsersComponent, data: { title: 'Users' } }
     ]
   }
 ];

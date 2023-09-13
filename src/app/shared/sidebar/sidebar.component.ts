@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,8 @@ import { UserService } from '../../services/user.service';
 })
 export class SidebarComponent {
 
-  items: any[] = [];
+  public items: any[] = [];
+  public user: User;
 
   constructor(
     private ngZone: NgZone,
@@ -20,6 +22,7 @@ export class SidebarComponent {
     private userService: UserService
   ) {
     this.items = sidebarService.menu;
+    this.user = userService.user;
   }
 
   signOut() {

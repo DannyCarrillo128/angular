@@ -4,18 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { NgChartsModule } from 'ng2-charts';
 
-import { IncrementComponent } from './increment/increment.component';
 import { DonutComponent } from './donut/donut.component';
+import { IncrementComponent } from './increment/increment.component';
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({
   declarations: [
+    DonutComponent,
     IncrementComponent,
-    DonutComponent
+    ModalComponent
   ],
   exports: [
+    DonutComponent,
     IncrementComponent,
-    DonutComponent
+    ModalComponent
   ],
   imports: [
     CommonModule,

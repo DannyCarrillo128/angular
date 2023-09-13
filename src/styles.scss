@@ -8,3 +8,26 @@
 .pointer {
   cursor: pointer;
 }
+
+.profile-picture {
+  height: 200px;
+  width: 200px;
+}
+
+.avatar {
+  border-radius: 100%;
+  width: 75px;
+}
+
+.shadow {
+  -webkit-filter: drop-shadow(1px 1px 3px);
+  filter: drop-shadow(1px 1px 3px);
+}
+
+.w100 {
+  width: 100px;
+}
+
+.w140 {
+  width: 140px;
+}
