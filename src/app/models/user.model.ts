@@ -15,14 +15,14 @@ export class User {
   ) { }
 
   get pictureUrl() {
-    if (this.profilePicture?.includes('https')) {
-      return this.profilePicture;
-    }
-
     if (this.profilePicture) {
+      if (this.profilePicture?.includes('https')) {
+        return this.profilePicture;
+      }
+
       return `${ baseUrl }/uploads/users/${ this.profilePicture }`;
     }
-    
+
     return `${ baseUrl }/uploads/users/no-image`;
   }
 

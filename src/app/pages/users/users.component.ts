@@ -66,10 +66,7 @@ export class UsersComponent implements OnInit {
   search(query: string) {
     if (query !== '') {
       this.searchesService.search('users', query).subscribe({
-        next: resp => {
-          this.users = resp;
-          console.log(resp);
-        }
+        next: resp => { this.users = resp; }
       });
     } else {
       this.users = this.usersTemp;
@@ -93,7 +90,6 @@ export class UsersComponent implements OnInit {
       text: 'You will delete a user',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it'
     }).then(result => {

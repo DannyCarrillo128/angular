@@ -9,14 +9,14 @@
           </div>
           <div class="modal-body">
             <div class="text-center">
-              <img *ngIf="!tempImage" class="profile-picture shadow" [src]="user.pictureUrl"/>
-              <img *ngIf="tempImage" class="profile-picture shadow" [src]="tempImage"/>
+              <img *ngIf="!preview" class="profile-picture shadow" [src]="img | image:type"/>
+              <img *ngIf="preview" class="profile-picture shadow" [src]="preview"/>
             </div>
             <br>
             <input #inputFile class="form-control" type="file" (change)="selectImage($event)"/>
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Close</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="hide()">Cancel</button>
               <button type="button" class="btn btn-primary" (click)="save()">Save</button>
           </div>
       </div>

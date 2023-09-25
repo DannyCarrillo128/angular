@@ -4,17 +4,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { ComponentsModule } from '../components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DoctorsComponent } from './doctors/doctors.component';
 import { Charts1Component } from './charts1/charts1.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
 import { MainComponent } from './main/main.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProgressComponent } from './progress/progress.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsersComponent } from './users/users.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 
 @NgModule({
@@ -22,12 +26,15 @@ import { UsersComponent } from './users/users.component';
     AccountSettingsComponent,
     Charts1Component,
     DashboardComponent,
+    DoctorsComponent,
+    HospitalsComponent,
     MainComponent,
     ProgressComponent,
     PromisesComponent,
     RxjsComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    DoctorComponent
   ],
   exports: [
     AccountSettingsComponent,
@@ -42,6 +49,7 @@ import { UsersComponent } from './users/users.component';
     ReactiveFormsModule,
     RouterModule,
     ComponentsModule,
+    PipesModule,
     SharedModule
   ]
 })

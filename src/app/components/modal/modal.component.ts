@@ -1,12 +1,8 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { FileUploadService } from '../../services/file-upload.service';
-import { User } from '../../models/user.model';
-import { environment } from '../../../environments/environment';
 
 declare const $: any;
-
-const baseUrl = environment.baseUrl;
 
 @Component({
   selector: 'app-modal',
@@ -14,18 +10,28 @@ const baseUrl = environment.baseUrl;
   styles: [
   ]
 })
-export class ModalComponent {
+export class ModalComponent implements OnChanges {
 
-  @Input() user: User = new User('', '');
+  @Input() type!: 'users' | 'doctors' | 'hospitals';
+  @Input() obj: any;
 
   @ViewChild('inputFile') imageInput!: ElementRef; 
 
-  public picture: File = {} as File;
-  public tempImage: any = null;
+  public selectedFile: File = {} as File;
+  public preview: any = null;
+  public img: string = '';
 
   constructor(
     private fileUploadService: FileUploadService
   ) { }
+
+  ngOnChanges() {
+    if (this.type === 'users') {
+      this.img = this.obj.profilePicture;
+    } else {
+      this.img = this.obj.image;
+    }
+  }
 
   show() {
     $('#exampleModal').on('show.bs.modal', () => {
@@ -35,16 +41,26 @@ export class ModalComponent {
   
   hide() {
     $('#exampleModal').on('hide.bs.modal', () => {
-      this.user = new User('', '');
-      this.tempImage = null;
-      this.imageInput.nativeElement.value = '';
-    });
+      this.clear();
+    }).modal('hide')
+      .off('show.bs.modal hide.bs.modal'); // Remove both events
+  }
+
+  clear() {
+    this.preview = null;
+    this.imageInput.nativeElement.value = '';
   }
 
   save() {
-    this.fileUploadService.updatePicture(this.picture, 'users', this.user.id!).then(picture => {
-      this.user.profilePicture = picture;
+    this.fileUploadService.updatePicture(this.selectedFile, this.type, this.obj.id).then(picture => {
+      if (this.type === 'users') {
+        this.obj.profilePicture = picture;
+      } else {
+        this.obj.image  = picture;
+      }
+      this.hide();
       Swal.fire('Success', 'Profile picture updated.', 'success');
+      this.ngOnChanges();
     })
     .catch(err => {
       Swal.fire('Error', err.error.message, 'error');
@@ -53,17 +69,17 @@ export class ModalComponent {
 
   selectImage(event: any) {
     const file = event.target.files[0];
-    this.picture = file;
+    this.selectedFile = file;
 
     if (!file) {
-      this.tempImage = null;
+      this.preview = null;
       return;
     }
     
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      this.tempImage = reader.result;
+      this.preview = reader.result;
     };
   }
 

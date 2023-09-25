@@ -1,0 +1,75 @@
+<div class="row animated fadeIn faster">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input #inputQuery type="text" class="form-control" placeholder="Type to search" (keyup)="search(inputQuery.value)"/>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Loading...</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+    </div>
+  </div>
+
+  <div *ngIf="!loading" class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-8">
+            <h4 class="card-title">Doctors</h4>
+          </div>
+          <div class="col">
+            <div class="text-right m-b-10">
+              <button class="btn btn-primary" [routerLink]="['/dashboard/doctor', 'new']"><i class="fa fa-plus"></i> Add doctor</button>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th style="width: 70px;"></th>
+                <th class="w100">Picture</th>
+                <th>Name</th>
+                <th class="text-nowrap w100">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let doctor of doctors; let i = index">
+                <td class="align-middle">{{ i + 1 }}</td>
+                <td class="text-center">
+                  <img class="pointer avatar shadow" [src]="doctor.image! | image:'doctors'" data-toggle="modal" data-target="#exampleModal" (click)="show(doctor)" />
+                </td>
+                <td class="align-middle">{{ doctor.name }}</td>
+                <td class="text-nowrap text-center">
+                  <a class="pointer" data-toggle="tooltip" data-original-title="Edit" [routerLink]="['/dashboard/doctor', doctor.id]">
+                    <i class="fa fa-save text-inverse m-r-10"></i>
+                  </a>
+                  <a class="pointer" data-toggle="tooltip" data-original-title="Delete" (click)="deleteDoctor(doctor)">
+                    <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <div *ngIf="inputQuery.value.length === 0" class="button-group">
+                    <button class="btn btn-secondary">Previous</button>
+                    <button class="btn btn-secondary">Next</button>
+                  </div>
+                </td>
+                <td class="align-middle" colspan="1">Total: {{ total }}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal type="doctors" [obj]="selectedDoctor"></app-modal>

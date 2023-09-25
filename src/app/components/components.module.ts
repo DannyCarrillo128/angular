@@ -7,6 +7,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { DonutComponent } from './donut/donut.component';
 import { IncrementComponent } from './increment/increment.component';
 import { ModalComponent } from './modal/modal.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ModalComponent } from './modal/modal.component';
   imports: [
     CommonModule,
     FormsModule,
-    NgChartsModule
+    NgChartsModule,
+    PipesModule
   ]
 })
 export class ComponentsModule { }
