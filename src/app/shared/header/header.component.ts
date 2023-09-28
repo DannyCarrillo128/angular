@@ -28,4 +28,10 @@ export class HeaderComponent {
     });
   }
 
+  search(query: string) {
+    if (query) {
+      this.router.navigateByUrl(`/dashboard/searches/${ query }`);
+    }
+  }
+
 }

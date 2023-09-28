@@ -1,31 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
+  
+  public menu = [];
 
-  menu: any[] = [
-    {
-      title: 'Home',
-      icon: 'mdi mdi-gauge',
-      submenu: [
-        { title: 'Charts', url: '/dashboard/charts1' },
-        { title: 'Progress bar', url: '/dashboard/progress' },
-        { title: 'Promises', url: 'promises' },
-        { title: 'Rxjs', url: 'rxjs' }
-      ]
-    },
-    {
-      title: 'Maintenance',
-      icon: 'mdi mdi-folder-lock-open',
-      submenu: [
-        { title: 'Users', url: 'users' },
-        { title: 'Hospitals', url: 'hospitals' },
-        { title: 'Doctors', url: 'doctors' }
-      ]
+  constructor(
+    private ngZone: NgZone,
+    private router: Router,
+    private userService: UserService
+  ) { }
+
+  loadMenu() {
+    const storedMenu = localStorage.getItem('menu');
+    
+    if (storedMenu) {
+      this.menu = JSON.parse(storedMenu);
+    } else {
+      Swal.fire('Error', 'Internal error', 'error');
+      this.userService.signOut();
+      this.ngZone.run(() => {
+        this.router.navigateByUrl('/login');
+      });
     }
-  ];
+  }
 
-  constructor() { }
 }

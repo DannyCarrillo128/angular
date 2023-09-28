@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { authGuard } from "../guards/auth.guard";
+import { adminGuard } from "../guards/admin.guard";
 
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { Charts1Component } from "./charts1/charts1.component";
@@ -14,6 +15,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { PromisesComponent } from "./promises/promises.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
+import { SearchesComponent } from "./searches/searches.component";
 import { UsersComponent } from "./users/users.component";
 
 const routes: Routes = [
@@ -32,7 +34,8 @@ const routes: Routes = [
       { path: 'progress', component: ProgressComponent, data: { title: 'Progress bar' } },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises' } },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'Rxjs' } },
-      { path: 'users', component: UsersComponent, data: { title: 'Users' } }
+      { path: 'searches/:query', component: SearchesComponent, data: { title: 'Searches' } },
+      { path: 'users', canActivate: [adminGuard], component: UsersComponent, data: { title: 'Users' } }
     ]
   }
 ];

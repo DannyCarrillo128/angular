@@ -27,6 +27,10 @@ export class SearchesService {
     };
   }
 
+  globalSearch(query: string) {
+    return this.http.get(`${ baseUrl }/global/${ query }`, this.options);
+  }
+
   search(type: 'users' | 'doctors' | 'hospitals', query: string) {
     return this.http.get(`${ baseUrl }/global/collection/${ type }/${ query }`, this.options).pipe(
       map((resp: any) => {

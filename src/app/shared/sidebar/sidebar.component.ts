@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from '../../services/sidebar.service';
 import { UserService } from '../../services/user.service';
@@ -10,7 +10,7 @@ import { User } from '../../models/user.model';
   styles: [
   ]
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
 
   public items: any[] = [];
   public user: User;
@@ -21,8 +21,11 @@ export class SidebarComponent {
     private sidebarService: SidebarService,
     private userService: UserService
   ) {
-    this.items = sidebarService.menu;
     this.user = userService.user;
+  }
+
+  ngOnInit() {
+    this.items = this.sidebarService.menu;
   }
 
   signOut() {

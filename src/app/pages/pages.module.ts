@@ -19,6 +19,7 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { UsersComponent } from './users/users.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { SearchesComponent } from './searches/searches.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { DoctorComponent } from './doctor/doctor.component';
     RxjsComponent,
     ProfileComponent,
     UsersComponent,
-    DoctorComponent
+    DoctorComponent,
+    SearchesComponent
   ],
   exports: [
     AccountSettingsComponent,
